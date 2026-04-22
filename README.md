@@ -154,3 +154,52 @@ Figmaでは複数人が同じファイルをリアルタイムで編集できま
 Gitの全容がざっくりイメージできたら、実際にClaude Codeを使ってGitを操作してみましょう。よりGitのイメージが具体化されるはずです。
 
 もう一度お伝えすると、このドキュメントでは `git add`のようなコマンドはあえて扱いません。Git操作はすべてClaude Codeに指示してもらいます。
+
+## はじめる前に
+
+実践編を進めるにあたって、以下が済んでいることを確認してください。
+
+- `Claude Codeがインストールされていること` インストール方法は[公式ドキュメント](https://docs.anthropic.com/ja/docs/claude-code)を参照してください。
+
+- `Visual Studio Code（VSCode）がインストールされていること` まだの場合は[公式サイト](https://code.visualstudio.com/)からインストールしてください。
+
+- `GitHubアカウントを持っていること` まだの場合は[GitHub](https://github.com/)からアカウントを作成してください。
+
+## 1. GitHub CLIをインストールする
+
+プルリクエストの作成やSSHキーの登録をClaude Codeから行うために、GitHub CLI（`gh`）が必要です。Claude Codeに指示してインストールします。
+
+```claude code
+GitHub CLI（gh）をインストールして、GitHubアカウントと連携してください。
+```
+
+途中でブラウザが開いて認証を求められます。画面の指示に従って認証を完了させてください。
+
+## 2. SSHキーを生成・登録する
+
+GitHubと安全に通信するための「鍵」を作ります。Claude Codeにそのまま貼り付けて指示してください。
+
+```claude code
+SSHキーを生成して、GitHub CLIを使ってGitHubに登録してください。
+メールアドレスは「GitHubに登録しているメールアドレス」です。
+すでに鍵がある場合はそのまま教えてください。
+```
+
+完了したら、Claude Codeに接続確認を指示します。
+
+```claude code
+GitHubとのSSH接続が成功しているか確認してください。
+```
+
+`Hi ユーザー名! You've successfully authenticated`か接続されているという内容が返ってくれば成功です。
+
+## 3. GitLensとGit Graphのインストール
+
+VSCodeを開いて、左側の拡張機能アイコン（四角が4つのアイコン）をクリックし、`GitLens`と`Git Graph`検索してインストールします。GitLensはVSCode内での「Gitを用いた開発」を便利にする拡張機能で、Git GraphはGitリポジトリの履歴やブランチを視覚化し、操作を容易にするための拡張機能です。
+
+<div style="display:flex; gap:20px;">
+<img width="1512" height="982" alt="スクリーンショット 2026-04-01 21 08 56" src="https://github.com/user-attachments/assets/8e332032-f0e8-4234-a64c-faba4a38ece1" /><img width="1512" height="982" alt="スクリーンショット 2026-04-02 12 54 11" src="https://github.com/user-attachments/assets/5901e74f-3959-4ad3-a939-ebcb48b9c54a" />
+</div>
+
+初心者のうちはGit Graphでなくても `Sourcetree` や `GitKraken` などのGUIツールを併用するようにしましょう。Claude Codeが何をしたかを視覚的に把握することで、Gitの概念が自然と身についていきます。
+
