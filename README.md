@@ -197,9 +197,140 @@ GitHubとのSSH接続が成功しているか確認してください。
 
 VSCodeを開いて、左側の拡張機能アイコン（四角が4つのアイコン）をクリックし、`GitLens`と`Git Graph`検索してインストールします。GitLensはVSCode内での「Gitを用いた開発」を便利にする拡張機能で、Git GraphはGitリポジトリの履歴やブランチを視覚化し、操作を容易にするための拡張機能です。
 
-<div style="display:flex; gap:20px;">
-<img width="1512" height="982" alt="スクリーンショット 2026-04-01 21 08 56" src="https://github.com/user-attachments/assets/8e332032-f0e8-4234-a64c-faba4a38ece1" /><img width="1512" height="982" alt="スクリーンショット 2026-04-02 12 54 11" src="https://github.com/user-attachments/assets/5901e74f-3959-4ad3-a939-ebcb48b9c54a" />
-</div>
+
+<img alt="スクリーンショット 2026-04-01 21 08 56" src="https://github.com/user-attachments/assets/8e332032-f0e8-4234-a64c-faba4a38ece1" width="49%" />
+<img alt="スクリーンショット 2026-04-02 12 54 11" src="https://github.com/user-attachments/assets/5901e74f-3959-4ad3-a939-ebcb48b9c54a" width="49%" />
+<br/>
+<br/>
 
 初心者のうちはGit Graphでなくても `Sourcetree` や `GitKraken` などのGUIツールを併用するようにしましょう。Claude Codeが何をしたかを視覚的に把握することで、Gitの概念が自然と身についていきます。
 
+## 4. GitHubでリモートリポジトリを作成してCloneする
+
+まずブラウザでGitHubを開き、リモートリポジトリを作成します。
+
+1. GitHubの右上の 「+」 アイコンから 「New」 を選択
+2. Repository name にプロジェクト名を入力
+3. 「Add README」をONにしてください
+4. 「Create repository」 をクリック
+
+<img alt="スクリーンショット 2026-04-01 21 21 55" src="https://github.com/user-attachments/assets/1614d4f2-df59-49f1-b274-042341859b2b" width="49%" />
+<img alt="スクリーンショット 2026-04-02 12 58 12" src="https://github.com/user-attachments/assets/e1704101-5c11-42f6-8286-2045c60831b0" width="49%" />
+<br/>
+<br/>
+
+README.mdが入ったリモートリポジトリが作成されました 🙌
+
+<img width="1512" height="905" alt="スクリーンショット 2026-04-02 14 29 10" src="https://github.com/user-attachments/assets/44c0c7a6-449f-4df2-a52a-4adf1e540317" />
+<br/>
+<br/>
+
+作成後に表示されるリモートリポジトリのURLをコピーして、ターミナルからClaude Codeに指示します。
+
+```claude code
+以下のリポジトリをSSHでCloneしてください。
+https://github.com/〇〇/〇〇.git
+```
+
+おそらくホームディレクトリ下にフォルダが作成されていると思うので、VSCodeでそのフォルダを開いてください。これでクローンが完了して、ローカルリポジトリが作成されました🙌
+
+ここで、Clone 直後のGitの状態を確認してみましょう。
+
+ブランチタブに切り替えて、View Git Graph アイコンを押下すると mainブランチに「Initial commit」というメッセージでコミットされていることがわかりますね。
+
+ここからブランチを切ってプルリクエストの作成からマージまでを体験していただきます🙏
+
+<img alt="スクリーンショット 2026-04-02 14 50 39" src="https://github.com/user-attachments/assets/fd66f6ca-90af-45d6-8fee-69b5e96d5b82" width="49%" />
+
+<img alt="スクリーンショット 2026-04-02 14 49 44" src="https://github.com/user-attachments/assets/64fcdc24-cf67-46a9-bd3d-bd52fb0bb98c" width="49%" />
+
+## 5. ブランチを作成
+
+作業を始める前に、必ずブランチを作ります。
+
+```claude code
+「feature/プロトタイプ修正」というブランチを作って切り替えてください。
+```
+
+VSCodeの左下の表示がブランチ名に変わっている、またはGit Graph で `origin/main` の横に `feature/プロトタイプ修正` のラベルが表示されていれば、`feature/プロトタイプ修正`ブランチに切り替わっています。
+
+<img width="1512" height="982" alt="スクリーンショット 2026-04-02 14 46 09" src="https://github.com/user-attachments/assets/16276349-5a13-4176-8d38-9deb23e14a5c" />
+
+## 6. ファイルを編集・コミットする
+
+ファイルを編集したら、Claude Codeにコミットを指示します。
+
+```claude code
+README.mdに適当な記述をしてコミットしてください。メッセージは「テストコミット」でお願いします。 
+```
+
+<img width="49%" alt="スクリーンショット 2026-04-02 18 58 48" src="https://github.com/user-attachments/assets/ca58df15-c911-4d92-8136-a0c50e6646a1" />
+<img width="49%" alt="スクリーンショット 2026-04-02 18 46 56" src="https://github.com/user-attachments/assets/845807bd-c313-4966-93b2-4c1047f2d75d" />
+<br/>
+<br/>
+
+これでコミットされたのですが、少し全体が分かりにくいので、一度mainブランチに切り替えてみてください。
+
+Git Graph のmainラベルをダブルクリックするか、Claude Codeにmainブランチに切り替えてみてください。と指示してみてください。mainブランチから`feature/プロトタイプ修正`ブランチが派生して「テストコミット」のメッセージでコミットされているのがわかります🙌
+
+
+<img width="1512" height="982" alt="スクリーンショット 2026-04-02 19 23 12" src="https://github.com/user-attachments/assets/44525a56-cc45-47ee-915d-5931bf37ad86" />
+
+## 7. Pushする
+
+コミットが終わったら、GitHubに送ります。
+
+```claude code
+`feature/プロトタイプ修正`ブランチへ移動して変更をPushしてください。
+```
+
+同様に現在のブランチではプッシュされたか視覚的にわからないので、一度mainブランチへ切り替えて Git Graph を見てみてください。 `feature/プロトタイプ修正`ブランチの横に`origin`とついたのが分かります。これがGitHub上（リモート）の現在地を示します。ローカルとリモートが同じ地点にいる、すなわち**手元の変更がGitHubに反映された状態**ということです。
+
+
+<img width="1512" height="982" alt="スクリーンショット 2026-04-02 19 29 31" src="https://github.com/user-attachments/assets/dad24603-577c-40c7-a641-3c990c075249" />
+
+## 8. プルリクエストを作成する
+
+最後にプルリクエストを作成します。
+
+```claude code
+feature/プロトタイプ修正のプルリクエストを作成してください。
+タイトルは「テストコミット」、
+本文には変更内容の概要を書いてください。
+```
+
+GithubのPull requestタブを見てみるとClaude Codeがそのままプルリクエストを作成してくれているのがわかります🙌
+
+<img width="3024" height="2771" alt="FireShot Capture 016 - Pull requests · hisamikurita_ai-designer-git-sample -  github com" src="https://github.com/user-attachments/assets/96ae8c11-eea8-4db5-a488-f18c800c5fea" />
+
+## 9. マージしてみる
+
+本来の開発ではここでエンジニアのレビューが入りますが、練習なので緑の「Merge pull request」ボタンを押下してマージしてみてください。
+
+<img width="1512" height="905" alt="スクリーンショット 2026-04-02 19 45 38" src="https://github.com/user-attachments/assets/9ebb59c8-725d-4bf0-9ee4-05e7438828d3" />
+
+リモートリポジトリのREADME.mdをみると変更が反映されていることがわかります🙌
+
+ここでVSCodeに戻ってmainブランチに切り替えて、README.mdを確認してみてください。変更が反映される前の状態なっていますね...
+
+また、Git Graphも確認してみましょう。ちょっと歪なグラフになっています💦
+
+<img width="1512" height="982" alt="スクリーンショット 2026-04-02 19 47 51" src="https://github.com/user-attachments/assets/b962b26d-2d88-4136-b21d-ba73696d46e3" />
+
+ここで注意して欲しいのが、**マージはリモート上で行われたので、ローカルのmainブランチはまだ古い状態です**。「歪なグラフ」とはローカルとリモートがズレている状態ですね。
+
+Claude CodeにmainをPullしてもらうと、グラフが一直線に整い、ローカルのmainブランチのREADME.mdも最新に反映されます。
+
+```claude code
+mainブランチに切り替えてPullしてください。
+```
+
+<img width="1512" height="982" alt="スクリーンショット 2026-04-02 19 52 53" src="https://github.com/user-attachments/assets/d5035b60-4ea4-4b58-ad80-56458e4f6e39" />
+
+変更が反映されない場合は Git Graph の リフレッシュアイコンを押下してみてください。
+
+これで、ローカルとリモートが一致したので、別の作業のためにmainブランチから作業用のブランチを切って作業する準備も整いました。
+
+一連のサイクルはこれで完了です🙌
+
+**このようにGit操作をするときは、今いるブランチとローカルとリモートの状態を常にGit Graphで視覚的に確認する習慣をつけましょう。**
