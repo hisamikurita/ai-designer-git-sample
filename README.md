@@ -316,6 +316,8 @@ GithubのPull requestタブを見てみるとClaude Codeがそのままプルリ
 また、Git Graphも確認してみましょう。ちょっと歪なグラフになっています💦
 
 <img width="1512" height="982" alt="スクリーンショット 2026-04-02 19 47 51" src="https://github.com/user-attachments/assets/b962b26d-2d88-4136-b21d-ba73696d46e3" />
+<br/>
+<br/>
 
 ここで注意して欲しいのが、**マージはリモート上で行われたので、ローカルのmainブランチはまだ古い状態です**。「歪なグラフ」とはローカルとリモートがズレている状態ですね。
 
@@ -326,6 +328,8 @@ mainブランチに切り替えてPullしてください。
 ```
 
 <img width="1512" height="982" alt="スクリーンショット 2026-04-02 19 52 53" src="https://github.com/user-attachments/assets/d5035b60-4ea4-4b58-ad80-56458e4f6e39" />
+<br/>
+<br/>
 
 変更が反映されない場合は Git Graph の リフレッシュアイコンを押下してみてください。
 
